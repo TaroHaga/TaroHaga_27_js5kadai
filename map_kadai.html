@@ -16,6 +16,19 @@ body {
 <div id="view"></div>
 <div id="myMap" style="width:100%; height:500px"></div>
 <!-- /MapArea -->
+<!--Directions[START]-->
+<div>
+  From:<input type="text" id="from" value="">
+  To:<input id="to" value="">
+  <select id="mode">
+      <option value="walking">walking</option>
+      <option value="driving">driving</option>
+  </select>
+  <input type="button" id="search" value="Search">
+</div>
+<div id="direction"></div>
+<!-- Directions[END] -->
+
 
 <!-- jQuery&GoogleMapsAPI -->
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -44,17 +57,14 @@ function mapsInit(position) {
     // map.pin( lat, lon, "color", [drag:true|false], [click:true|false], [hover:true|false], [visible:true|false] );
     //----------------------------------------------------
     let pin = map.pin(lat, lon, "#0000ff");
+
 //----------------------------------------------------
-        //4. Add Infobox-Iframe
-        // infoboxIframe(lat, lon, width, height,  title, iframe);
-        //----------------------------------------------------
-        const title = "Movie";
-        const iframe = '<iframe src="https://channel9.msdn.com/Events/Build/2016/B867/player#time=0h15m26s:paused" width="400" height="225" allowFullScreen frameBorder="0"></iframe>';
-        map.infoboxIframe(lat, lon, 300, 420, title, iframe);
-    
-
-
-
+//----------------------------------------------------
+    //4. Add Infobox-HTML
+    // infoboxHtml(lat, lon, html);
+    //----------------------------------------------------
+    map.infoboxHtml(lat, lon, '<div style="background:white;">You are here!</div>');
+    map.getBoundary("PopulatedPlace");
 };
 
 //2． 位置情報の取得に失敗した場合の処理
